@@ -1,0 +1,39 @@
+plugins {
+	id 'java'
+	id 'idea'
+	id 'eclipse'
+	id 'jacoco'
+	id "com.github.johnrengelman.shadow" version "4.0.4"
+}
+
+defaultTasks 'clean', 'test', 'jacocoTestReport'
+
+compileJava.options.encoding = 'UTF-8'
+group = 'course_ece448'
+version = '1.0.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+buildDir = 'build'
+libsDirName='../'
+
+repositories {
+	jcenter()
+	mavenCentral()
+}
+
+sourceSets {
+	main {
+		java {
+			srcDirs = ['src/main/java']
+		}
+
+	}
+
+}
+
+
+shadowJar {
+	classifier = "mlbscoreboard"
+	baseName = "ece448"
+	from(project.sourceSets.main.output)
+}
